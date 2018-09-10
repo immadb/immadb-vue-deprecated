@@ -6,6 +6,7 @@ import bout from './bout'
 import event from './event'
 import events from './events'
 import promotions from './promotions'
+import user from './user'
 
 const store = new Vuex.Store({
   strict: true,
@@ -13,7 +14,8 @@ const store = new Vuex.Store({
     bout,
     event,
     events,
-    promotions
+    promotions,
+    user
   }
 })
 

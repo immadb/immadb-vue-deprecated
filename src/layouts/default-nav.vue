@@ -29,13 +29,12 @@
           <b-nav-item href="/register">Register</b-nav-item>
         </template>
 
-        <!-- @todo Is this really the right way to approach this?  If either are missing, then we assume no user.  We wait for the app.vue layout's beforeCreate to kick in, which loads the user. -->
+        <!-- @todo Is this really the right way to approach this?  If either are missing, then we assume no user.  We wait for main.js's beforeCreate to kick in, which loads the user. -->
         <template v-else-if="user">
           <!-- <b-nav-item-dropdown text="Contribute" right>
           <b-dropdown-item href="{{ route('people.index') }}">People</b-dropdown-item>
           </b-nav-item-dropdown> -->
 
-          <!-- <b-nav-item-dropdown :text="{{ user.handle }}" right> -->
           <b-nav-item-dropdown right>
             <template slot="button-content">
               <em>{{ user.handle }}</em>
@@ -43,9 +42,8 @@
             <b-dropdown-item href="/profile">Profile</b-dropdown-item>
             <b-dropdown-item href="/activity">Activity</b-dropdown-item>
             <b-dropdown-item href="/settings">Settings</b-dropdown-item>
-            <b-dropdown-divider></b-dropdown-divider>
-            <!-- <div class="dropdown-divider"></div> -->
-            <b-dropdown-item href="/logout">Logout</b-dropdown-item>
+            <b-dropdown-divider />
+            <b-dropdown-item :to="{ name: 'logout' }">Logout</b-dropdown-item>
             <!-- <b-dropdown-item href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</b-dropdown-item>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
@@ -61,7 +59,10 @@
 export default {
   computed: {
     authenticated () {
-      return false
+      return this.$store.getters['user/auth']
+    },
+    user () {
+      return this.$store.getters['user/data']
     }
   },
 

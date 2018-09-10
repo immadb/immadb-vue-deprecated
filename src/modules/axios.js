@@ -4,21 +4,21 @@ import axios from 'axios'
 import qs from 'qs'
 
 // import {Notification} from 'element-ui'
-// import store from '@/store'
+import store from '@/store'
 
 const api = axios.create({
   baseURL: `${process.env.API}/v1`,
   paramsSerializer: (params) => qs.stringify(params)
 })
 
-// api.interceptors.request.use(config => {
-// const auth = store.getters["user/auth"]
-// if (auth) config.headers.common["Authorization"] = `${auth.token_type} ${auth.access_token}`
-//
-// return config
-// }, (error) => {
-// return Promise.reject(error)
-// })
+api.interceptors.request.use(config => {
+  const auth = store.getters['user/auth']
+  if (auth) config.headers.common['Authorization'] = `${auth.token_type} ${auth.access_token}`
+
+  return config
+}, (error) => {
+  return Promise.reject(error)
+})
 
 // api.interceptors.response.use(res => {
 // return res

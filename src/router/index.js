@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/store'
+
 // import hello from '@/components/Hello.vue'
 import home from '@/pages/home.vue'
 // // import dashboard from '@/pages/dashboard.vue'
@@ -112,7 +114,7 @@ const routes = [
     meta: {
       title: 'Login'
     }
-  }
+  },
   // {
   //   path: '/profile',
   //   name: 'profile',
@@ -137,17 +139,17 @@ const routes = [
   //     title: 'Settings'
   //   }
   // },
-  // {
-  //   path: '/logout',
-  //   name: 'logout',
-  //   meta: {
-  //     title: 'Logout',
-  //   // },
-  //   // beforeEnter (to, from, next) {
-  //   //     store.dispatch('user/logout');
-  //   //     next({name: 'home'});
-  //   }
-  // },
+  {
+    path: '/logout',
+    name: 'logout',
+    meta: {
+      title: 'Logout'
+    },
+    beforeEnter (to, from, next) {
+      store.dispatch('user/logout')
+      next({name: 'home'})
+    }
+  }
   // {
   //   path: '/register',
   //   name: 'register',

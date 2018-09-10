@@ -21,5 +21,10 @@ new Vue({
   store,
   el: '#app',
   template: '<App/>',
-  components: { App }
+  components: { App },
+  beforeCreate () {
+    if (this.$store.getters['user/auth']) {
+      this.$store.dispatch('user/data')
+    }
+  }
 })
