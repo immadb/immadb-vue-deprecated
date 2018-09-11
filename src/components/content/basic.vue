@@ -1,6 +1,11 @@
 <template>
-  <b-card no-body>
-    <b-card-header>
+  <b-card
+    no-body
+    border-variant="light"
+  >
+    <b-card-header
+      header-bg-variant="white"
+    >
       <b-container>
         <b-row>
           <b-col cols="10" class="p-0">
@@ -25,11 +30,8 @@
       </b-container>
     </b-card-header>
     <b-card-body>
-      <slot></slot>
+      <slot />
     </b-card-body>
-    <b-card-footer>
-      <!-- @todo What do we do with this...? -->
-    </b-card-footer>
   </b-card>
 </template>
 
@@ -80,3 +82,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.card-body {
+  padding: 0;
+}
+</style>

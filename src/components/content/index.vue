@@ -1,48 +1,49 @@
 <template>
-  <b-container v-if="index">
-    <b-row>
-      <b-col class="p-0">
-        <!-- <immadb-watchlist-toggle v-if="watchable" class="float-left mr-2"></immadb-watchlist-toggle> -->
-        <h2 class="mb-0 text-left">
-          {{ title }}
-          <small class="text-muted">{{ totalRows }}</small>
-        </h2>
-      </b-col>
-      <b-col class="p-0">
-        <div class="float-right">
-          <b-pagination
-            v-if="numberOfPages > 1"
-            :total-rows="totalRows"
-            :per-page="rowsPerPage"
-            v-model="currentPage"
-            :disabled="loading"
-            size="sm"
+  <b-card
+    no-body
+    border-variant="light"
+    v-if="index"
+  >
+    <b-card-header
+      header-bg-variant="white"
+    >
+      <b-container>
+        <b-row>
+          <b-col class="p-0">
+            <!-- <immadb-watchlist-toggle v-if="watchable" class="float-left mr-2"></immadb-watchlist-toggle> -->
+            <h2 class="mb-0">
+              {{ title }}
+              <small class="text-muted">{{ totalRows }}</small>
+            </h2>
+            <!-- <h6 v-if="subtitle">
+              {{ subtitle }}
+            </h6> -->
+          </b-col>
+          <b-col class="p-0">
+            <div class="float-right">
+              <b-pagination
+                v-if="numberOfPages > 1"
+                :total-rows="totalRows"
+                :per-page="rowsPerPage"
+                v-model="currentPage"
+                :disabled="loading"
+                size="sm"
+              />
+            </div>
+          </b-col>
+        </b-row>
+      </b-container>
+    </b-card-header>
+    <b-card-body>
+      <ul class="list-unstyled">
+        <li class="index-item" v-for="item in index.data">
+          <slot name="item"
+            :item="item"
           />
-        </div>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col class="p-0">
-        <ul class="list-unstyled">
-          <li class="index-item" v-for="item in index.data">
-            <slot name="item"
-              :item="item"
-            />
-          </li>
-        </ul>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col class="p-0">
-        &nbsp;
-      </b-col>
-      <b-col class="p-0">
-        <div class="float-right">
-          <!-- @todo Find out how to include pagination here without incurring double data loads -->
-        </div>
-      </b-col>
-    </b-row>
-  </b-container>
+        </li>
+      </ul>
+    </b-card-body>
+  </b-card>
 </template>
 
 <script>
