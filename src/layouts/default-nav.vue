@@ -14,10 +14,8 @@
     <b-collapse is-nav id="nav_collapse">
       <b-navbar-nav>
         <b-nav-item :to="{ name: 'promotions' }">Promotions</b-nav-item>
-        <b-nav-item-dropdown text="Events" right>
-          <b-dropdown-item :to="{ name: 'upcoming-events' }">Upcoming</b-dropdown-item>
-          <b-dropdown-item :to="{ name: 'past-events' }">Past</b-dropdown-item>
-        </b-nav-item-dropdown>
+        <b-nav-item :to="{ name: 'upcoming-events' }">Upcoming Events</b-nav-item>
+        <b-nav-item :to="{ name: 'past-events' }">Past Events</b-nav-item>
         <b-nav-item href="news">News</b-nav-item>
       </b-navbar-nav>
 
@@ -39,9 +37,9 @@
             <template slot="button-content">
               <em>{{ user.handle }}</em>
             </template>
-            <b-dropdown-item href="/profile">Profile</b-dropdown-item>
-            <b-dropdown-item href="/activity">Activity</b-dropdown-item>
-            <b-dropdown-item href="/settings">Settings</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'profile' }">Profile</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'activity' }">Activity</b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'settings' }">Settings</b-dropdown-item>
             <b-dropdown-divider />
             <b-dropdown-item :to="{ name: 'logout' }">Logout</b-dropdown-item>
             <!-- <b-dropdown-item href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</b-dropdown-item>

@@ -2,7 +2,10 @@
   <b-container>
     <b-row>
       <b-col>
-        <b-card no-body>
+        <b-card
+          no-body
+          border-variant="light"
+        >
           <b-card-header>
             <default-header />
           </b-card-header>
@@ -36,4 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card-body {
+  padding: 0;
+}
 </style>

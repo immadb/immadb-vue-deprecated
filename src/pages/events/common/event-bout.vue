@@ -15,7 +15,7 @@
         :spoilers="spoilers"
       />
     </b-col>
-    <b-col cols="2">
+    <b-col cols="3">
       <b-media no-body>
         <b-media-body>
           <h6 class="m-0 text-center">
@@ -28,6 +28,12 @@
           </h6>
           <h6 class="m-0 text-center">
             {{ bout.format }}
+          </h6>
+          <h6 class="m-0 text-center" v-if="spoilers">
+            {{ boutResult }}
+          </h6>
+          <h6 class="m-0 text-center" v-if="spoilers">
+            {{ boutTime }}
           </h6>
         </b-media-body>
       </b-media>
@@ -51,7 +57,7 @@ export default {
     'bout-fighter': boutFighter
   },
   props: {
-    'bout': {
+    bout: {
       required: true,
       type: Object
     },
@@ -59,6 +65,14 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    }
+  },
+  computed: {
+    boutResult () {
+      return this.$utils.boutMethodSummary(this.bout)
+    },
+    boutTime () {
+      return this.$utils.boutTimeSummary(this.bout)
     }
   },
   mounted () {

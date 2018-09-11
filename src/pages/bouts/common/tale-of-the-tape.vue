@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="tale-of-the-tape">
     <b-row>
       <b-col sm>
         <tale-of-the-tape-fighter :fighter="bout.fighter_1" :bout="bout" align="left"/>
@@ -36,8 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  div .col-sm {
-    padding-right: 0em;
-    padding-left: 0em;
+  .tale-of-the-tape {
+    padding: 1em;
   }
 </style>

@@ -17,9 +17,9 @@ import peopleShow from '@/pages/people/show.vue'
 // // import help from '@/pages/help.vue'
 import login from '@/pages/auth/login.vue'
 // // import loginReset from '@/pages/login/reset.vue'
-// import profile from '@/pages/user/profile.vue'
-// import activity from '@/pages/user/activity.vue'
-// import settings from '@/pages/user/settings.vue'
+import profile from '@/pages/user/profile.vue'
+import activity from '@/pages/user/activity.vue'
+import settings from '@/pages/user/settings.vue'
 // import register from '@/pages/auth/register.vue'
 // // import table from '@/pages/table.vue'
 // // import view from '@/pages/view.vue'
@@ -115,30 +115,30 @@ const routes = [
       title: 'Login'
     }
   },
-  // {
-  //   path: '/profile',
-  //   name: 'profile',
-  //   component: profile,
-  //   meta: {
-  //     title: 'Profile'
-  //   }
-  // },
-  // {
-  //   path: '/activity',
-  //   name: 'activity',
-  //   component: activity,
-  //   meta: {
-  //     title: 'Activity'
-  //   }
-  // },
-  // {
-  //   path: '/settings',
-  //   name: 'settings',
-  //   component: settings,
-  //   meta: {
-  //     title: 'Settings'
-  //   }
-  // },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: profile,
+    meta: {
+      title: 'Profile'
+    }
+  },
+  {
+    path: '/activity',
+    name: 'activity',
+    component: activity,
+    meta: {
+      title: 'Activity'
+    }
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: settings,
+    meta: {
+      title: 'Settings'
+    }
+  },
   {
     path: '/logout',
     name: 'logout',

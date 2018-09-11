@@ -89,6 +89,20 @@ class Utils {
     return bout ? { name: 'bouts.show', params: { slug: bout.slug } } : {}
   }
 
+  /**
+   * [boutTimeSummary description]
+   * @param  {[type]} bout             [description]
+   * @param  {String} [fallback='n/a'] [description]
+   * @return {[type]}                  [description]
+   */
+  boutTimeSummary (bout, fallback = 'n/a') {
+    if (!bout || !bout.round || !bout.time) {
+      return fallback
+    }
+
+    return `R${bout.round} ${bout.time}`
+  }
+
   boutTitle (bout, fallback = 'n/a') {
     if (!bout) {
       return fallback
