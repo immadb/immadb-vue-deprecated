@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <tale-of-the-tape :bout="bout" />
-
-    <b-tabs
-      card
-      :pills="true"
-    >
+  <basic-card>
+    <template slot="header">
+      <tale-of-the-tape :bout="bout" />
+    </template>
+    <basic-tabs>
       <b-tab title="Details" active>
         <b-media no-body>
           <b-media-aside vertical-align="top">
@@ -31,27 +29,27 @@
           :show-empty="true"
         >
           <!-- @todo These two fighter slots are more or less the same.  Refactoring is likely in order. -->
-          <template slot="fighter_1" slot-scope="data">
+          <template slot="red_fighter" slot-scope="data">
             <p>
-              <router-link :to="$utils.personRoute(data.item.fighter_1)">
-                {{ data.item.fighter_1.full_name }}
+              <router-link :to="$utils.personRoute(data.item.red_fighter)">
+                {{ data.item.red_fighter.full_name }}
               </router-link>
-              <b-badge :variant="$utils.boutResultVariant(data.item, data.item.fighter_1)">{{ $utils.boutFighterResult(data.item, data.item.fighter_1) }}</b-badge>
+              <b-badge :variant="$utils.boutResultVariant(data.item, data.item.red_fighter)">{{ $utils.boutFighterResult(data.item, data.item.red_fighter) }}</b-badge>
             </p>
             <p>
-              {{ data.item.fighter_1.pretty_prefight_record }}
+              {{ data.item.red_fighter.pretty_prefight_record }}
             </p>
           </template>
 
-          <template slot="fighter_2" slot-scope="data">
+          <template slot="blue_fighter" slot-scope="data">
             <p>
-              <b-badge :variant="$utils.boutResultVariant(data.item, data.item.fighter_2)">{{ $utils.boutFighterResult(data.item, data.item.fighter_2) }}</b-badge>
-              <router-link :to="$utils.personRoute(data.item.fighter_2)">
-                {{ data.item.fighter_2.full_name }}
+              <b-badge :variant="$utils.boutResultVariant(data.item, data.item.blue_fighter)">{{ $utils.boutFighterResult(data.item, data.item.blue_fighter) }}</b-badge>
+              <router-link :to="$utils.personRoute(data.item.blue_fighter)">
+                {{ data.item.blue_fighter.full_name }}
               </router-link>
             </p>
             <p>
-              {{ data.item.fighter_2.pretty_prefight_record }}
+              {{ data.item.blue_fighter.pretty_prefight_record }}
             </p>
           </template>
 
@@ -77,27 +75,33 @@
       <b-tab title="Results" v-if="isBoutFinished">
         <description-list :items="resultItems" />
       </b-tab>
-      <b-tab title="Discussions">
+      <!-- <b-tab title="Discussions"> -->
         <!-- <discussions if="bout.discussions" :discussions="bout.discussions" /> -->
+      <!-- </b-tab> -->
+      <b-tab v-if="hasNotes" title="Notes">
+        <basic-notes :notes="bout.notes" />
       </b-tab>
-      <b-tab title="Notes">
-        <description-list :items="noteItems" />
-      </b-tab>
-    </b-tabs>
-  </div>
+    </basic-tabs>
+  </basic-card>
 </template>
 
 <script>
+import BasicCard from '@/components/general/basic-card'
+import BasicTabs from '@/components/general/basic-tabs'
 import BoutEntry from '@/pages/common/bout-entry'
 import DescriptionList from '@/components/general/description-list'
 // import Discussions from '@/components/general/discussion-index'
+import BasicNotes from '@/components/general/basic-notes'
 import TaleOfTheTape from './tale-of-the-tape'
 
 export default {
   components: {
+    'basic-card': BasicCard,
+    'basic-tabs': BasicTabs,
     'bout-entry': BoutEntry,
     'description-list': DescriptionList,
     // 'discussions': Discussions,
+    'basic-notes': BasicNotes,
     'tale-of-the-tape': TaleOfTheTape
   },
   props: {
@@ -108,8 +112,20 @@ export default {
   },
   data () {
     return {
-      showResults: false,
-      detailItems: [
+      showResults: false
+    }
+  },
+  computed: {
+    boutTableFields () {
+      return [
+        { key: 'red_fighter', class: 'align-middle text-center' },
+        { key: 'event_and_results', class: 'align-middle text-center', label: 'Event/Results' },
+        // { key: 'event_and_results', class: 'align-middle text-center', thStyle: 'width: 16.66%', label: 'Event/Results' },
+        { key: 'blue_fighter', class: 'align-middle text-center' }
+      ]
+    },
+    detailItems () {
+      return [
         { term: 'Event', description: this.$utils.eventFullTitle(this.bout.event), route: this.$utils.eventRoute(this.bout.event) },
         { term: 'Date/Time', description: this.bout.event.full_date_full_time },
         { term: 'Weight', description: this.$utils.boutWeight(this.bout) },
@@ -119,8 +135,13 @@ export default {
         { term: 'Billing', description: this.$utils.boutBilling(this.bout) + ` (${this.bout.match} of ${this.bout.event.bouts_count})` },
         { term: 'Type', description: this.$utils.boutType(this.bout) }
         // { term: 'Judges', description: this.bout.judges.map(judge => judge.complete_name).join(' | ') }
-      ],
-      resultItems: [
+      ]
+    },
+    hasCommonBouts: (t) => !!t.bout.common_bouts,
+    hasNotes: (t) => Array.isArray(t.bout.notes) && t.bout.notes.length,
+    isBoutFinished: (t) => t.bout.status === 'finished',
+    resultItems () {
+      return [
         {
           term: 'Winner',
           description: this.bout.winner ? this.bout.winner.complete_name : 'n/a',
@@ -130,26 +151,14 @@ export default {
         { term: 'Round', description: this.bout.round ? this.bout.round : 'n/a' },
         { term: 'Time', description: this.bout.time ? this.bout.time : 'n/a' }
         // { term: 'Official Scores', description: this.bout.pretty_official_scores }
-      ],
-      noteItems: [
-        { term: 'Notes', description: this.bout.pretty_notes }
       ]
     }
-  },
-  computed: {
-    boutTableFields () {
-      return [
-        { key: 'fighter_1', class: 'align-middle text-center' },
-        { key: 'event_and_results', class: 'align-middle text-center', label: 'Event/Results' },
-        // { key: 'event_and_results', class: 'align-middle text-center', thStyle: 'width: 16.66%', label: 'Event/Results' },
-        { key: 'fighter_2', class: 'align-middle text-center' }
-      ]
-    },
-    isBoutFinished: (t) => t.bout.status === 'finished',
-    hasCommonBouts: (t) => !!t.bout.common_bouts
   },
   mounted () {
     console.log('Bout component mounted.')
   }
 }
 </script>
+
+<style lang="scss" scoped>
+</style>

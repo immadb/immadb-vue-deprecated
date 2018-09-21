@@ -1,6 +1,8 @@
 <template>
-  <b-media :right-align="align === 'right'" vertical-align="top">
-    <!-- @todo Make all (?) image components lazy. -->
+  <b-media
+    :right-align="align === 'right'"
+    vertical-align="top"
+  >
     <b-img-lazy slot="aside" rounded thumbnail :src="fighterImageUrl" classzzz="ml-3" :alt="fighter.full_name" />
     <!-- <b-img-lazy slot="aside" rounded thumbnail blank class="mr-3" :alt="fighter.full_name" height="75" width="75" /> -->
 
@@ -16,7 +18,7 @@
       </template>
     </h6>
     <h6 v-if="spoilers" :class="textClass" class="mt-0">
-    <b-badge :variant="resultVariant(bout, fighter)">{{ $utils.boutFighterResult(bout, fighter) }}</b-badge>
+      <b-badge :variant="$utils.boutResultVariant(bout, fighter)">{{ $utils.boutFighterResult(bout, fighter) }}</b-badge>
     </h6>
   </b-media>
 </template>
@@ -54,26 +56,12 @@ export default {
       return this.$utils.personTwitterProfileThumbUrl(this.fighter)
     }
   },
-  methods: {
-    // @todo This method is used in more than one place.  DRY it up.
-    resultVariant (bout, fighter) {
-      if (bout.winner_id === null) {
-        return 'secondary'
-      }
-
-      if (fighter.id === bout.winner_id) {
-        return 'success'
-      }
-
-      return 'danger'
-    }
-  },
   mounted () {
-    console.log('Event bout-fighter component mounted.')
+    console.log('Show event bout-fighter component mounted.')
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
+//
 </style>

@@ -1,7 +1,16 @@
 <template>
-  <b-media :right-align="align==='right'" vertical-align="top">
+  <div>
+    <b-img center rounded thumbnail :src="fighterImageUrl" :alt="fighter.full_name" height="150" width="150" />
+    <p class="text-center">
+      <router-link :to="this.$utils.personRoute(fighter)">
+        {{ fighter.first_name }}<br />
+        {{ fighter.last_name }}
+      </router-link>
+    </p>
+  </div>
+  <!-- <b-media :right-align="align==='right'" vertical-align="top">
     <b-img slot="aside" rounded thumbnail :src="fighterImageUrl" :alt="fighter.full_name" height="150" width="150" />
-    <!-- <b-img slot="aside" rounded thumbnail blank blank-color="lightgray" :alt="fighter.full_name" height="150" width="150" /> -->
+    <b-img slot="aside" rounded thumbnail blank blank-color="lightgray" :alt="fighter.full_name" height="150" width="150" />
 
     <p :class="textClass">
       <router-link :to="this.$utils.personRoute(fighter)">
@@ -16,7 +25,7 @@
     <p :class="textClass">{{ fighter.pretty_leg_reach }}</p>
     <p :class="textClass">{{ fighter.pretty_fighting_out_of }}</p>
 
-  </b-media>
+  </b-media> -->
 </template>
 
 <script>

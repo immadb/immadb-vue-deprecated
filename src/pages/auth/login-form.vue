@@ -38,14 +38,6 @@
       </b-form-feedback> -->
     </b-form-group>
 
-    <b-form-group id="loginRememberMeGroup">
-      <b-form-checkbox id="remember"
-        v-model="form.remember"
-      >
-        Remember Me
-      </b-form-checkbox>
-    </b-form-group>
-
     <b-button type="submit" variant="primary">Login</b-button>
     <button type="button" class="btn btn-link">Forgot your password?</button>
   </b-form>
@@ -57,9 +49,7 @@ import Form from '@/helpers/form.js'
 
 const form = new Form({
   email: '',
-  password: '',
-  remember: ''
-  // secret: 'S3CR3T',
+  password: ''
 })
 
 export default {
@@ -108,7 +98,7 @@ export default {
         // this.reset()
         this.processing = true
         // this.loading = true
-        await this.$store.dispatch('user/login', {form: this.form, route: {...this.route}})
+        await this.$store.dispatch('user/login', {credentials: this.form.getData(), route: {...this.route}})
       } catch (err) {
         console.log(err.response.data)
         this.form.errors.attach(err.response.data)

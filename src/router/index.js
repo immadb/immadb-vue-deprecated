@@ -9,7 +9,7 @@ import promotions from '@/pages/promotions/index.vue'
 import pastEvents from '@/pages/events/past/index.vue'
 import upcomingEvents from '@/pages/events/upcoming/index.vue'
 // // import events from '@/pages/events/index.vue'
-import eventsShow from '@/pages/events/show.vue'
+import eventsShow from '@/pages/events/show/show.vue'
 import boutsShow from '@/pages/bouts/show.vue'
 import peopleShow from '@/pages/people/show.vue'
 // import news from '@/pages/news/index.vue'
@@ -20,7 +20,7 @@ import login from '@/pages/auth/login.vue'
 import profile from '@/pages/user/profile.vue'
 import activity from '@/pages/user/activity.vue'
 import settings from '@/pages/user/settings.vue'
-// import register from '@/pages/auth/register.vue'
+import register from '@/pages/auth/register.vue'
 // // import table from '@/pages/table.vue'
 // // import view from '@/pages/view.vue'
 // // import _404 from '@/pages/404.vue'
@@ -108,6 +108,14 @@ const routes = [
   //     },
   // },
   {
+    path: '/register',
+    name: 'register',
+    component: register,
+    meta: {
+      title: 'Register'
+    }
+  },
+  {
     path: '/login',
     name: 'login',
     component: login,
@@ -150,14 +158,6 @@ const routes = [
       next({name: 'home'})
     }
   }
-  // {
-  //   path: '/register',
-  //   name: 'register',
-  //   component: register,
-  //   meta: {
-  //     title: 'Register'
-  //   }
-  // }
 ]
 
 const router = new Router({

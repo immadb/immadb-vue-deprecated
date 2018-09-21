@@ -1,25 +1,23 @@
 <template>
   <basic-content
     :title="title"
-    :subtitle="subtitle"
     :loading="loading"
   >
-    @todo Person details go here
-      <!-- <person
-        v-if="person"
-        :person="person"
-      /> -->
+    <person
+      v-if="person"
+      :person="person"
+    />
   </basic-content>
 </template>
 
 <script>
-import basicContent from '@/components/content/basic'
-// import person from './common/person.vue'
+import BasicContent from '@/components/content/basic'
+import Person from './person.vue'
 
 export default {
   components: {
-    'basic-content': basicContent
-    // 'person': person
+    'basic-content': BasicContent,
+    'person': Person
   },
   data () {
     return {
@@ -28,10 +26,7 @@ export default {
   },
   computed: {
     title () {
-      return this.person ? this.person.full_name : '...'
-    },
-    subtitle () {
-      return this.person ? this.person.nickname : '...'
+      return this.person ? this.person.complete_name : '...'
     },
     person () {
       let data = this.$store.getters['person/data']
@@ -52,7 +47,7 @@ export default {
         this.loading = false
       }
     },
-    async getData () {
+    getData () {
       this.getPerson()
     }
   },
@@ -60,10 +55,11 @@ export default {
     console.log('People show page created.')
     this.getData()
   },
-  // beforeDestroy () {
-  //   // this.$store.commit('person/data', null)
-  //   this.$store.dispatch('person/clear')
-  // },
+  watch: { /** @todo Maybe try to figure out why beforeRouteUpdate doesn't work, since it seems a bit more elegant. */
+    '$route' (to, from) {
+      this.getData()
+    }
+  },
   mounted () {
     console.log('People show page mounted.')
   }

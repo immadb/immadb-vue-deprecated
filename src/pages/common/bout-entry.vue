@@ -10,7 +10,7 @@
     <b-col>
       <bout-fighter
         :bout="bout"
-        :fighter="bout.fighter_1"
+        :fighter="bout.red_fighter"
         align="left"
         :spoilers="spoilers"
       />
@@ -35,7 +35,7 @@
     <b-col>
       <bout-fighter
         :bout="bout"
-        :fighter="bout.fighter_2"
+        :fighter="bout.blue_fighter"
         align="right"
         :spoilers="spoilers"
       />

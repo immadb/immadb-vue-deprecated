@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import basicContent from '@/components/content/basic'
-import event from './common/event.vue'
+import BasicContent from '@/components/content/basic'
+import event from './event.vue'
 
 export default {
   components: {
-    'basic-content': basicContent,
+    'basic-content': BasicContent,
     'event': event
   },
   data () {

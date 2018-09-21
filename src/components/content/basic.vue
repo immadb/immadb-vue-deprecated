@@ -84,7 +84,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-body {
-  padding: 0;
-}
 </style>

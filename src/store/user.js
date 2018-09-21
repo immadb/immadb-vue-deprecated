@@ -27,8 +27,17 @@ const user = {
   },
 
   actions: {
-    async login ({commit, dispatch}, {form, route}) {
-      const {data} = await axios.post('login', form, {custom: true})
+    async register ({commit, dispatch}, {credentials, route}) {
+      console.log(credentials)
+      const {data} = await axios.post('registrations', credentials, {custom: true})
+      console.log(data)
+      // commit('authSet', {data})
+      // await dispatch('data')
+      // router.push(route)
+    },
+
+    async login ({commit, dispatch}, {credentials, route}) {
+      const {data} = await axios.post('login', credentials, {custom: true})
       commit('authSet', {data})
       await dispatch('data')
       router.push(route)
@@ -43,14 +52,20 @@ const user = {
         // ...
       } finally {
         commit('authDelete')
-        router.push({name: 'login', params: {route: {path: window.location.pathname}}})
+        // router.push({name: 'login', params: {route: {path: window.location.pathname}}})
       }
     },
 
     async data ({commit, state, getters}) {
       if (state.auth) {
-        const {data} = await axios.get('account')
-        commit('data', data)
+        try {
+          const {data} = await axios.get('account')
+          commit('data', data)
+        } catch (err) {
+          console.log(err)
+          commit('authDelete')
+          // router.push({name: 'login', params: {route: {path: window.location.pathname}}})
+        }
         return getters.data
       }
     }
@@ -72,6 +87,13 @@ const user = {
     //
     //   // await context.dispatch('get')
     // },
+
+    // async register ({commit, dispatch}, {credentials, route}) {
+    //   const {data} = await axios.post('register', credentials, {custom: true})
+    //   commit('authSet', {data})
+    //   await dispatch('data')
+    //   router.push(route)
+    // }
   },
 
   getters: {

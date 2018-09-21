@@ -108,8 +108,8 @@ class Utils {
       return fallback
     }
 
-    let a = bout.fighter_1 ? bout.fighter_1.full_name : 'unknown'
-    let b = bout.fighter_2 ? bout.fighter_2.full_name : 'unknown'
+    let a = bout.red_fighter ? bout.red_fighter.full_name : 'unknown'
+    let b = bout.blue_fighter ? bout.blue_fighter.full_name : 'unknown'
 
     return `${a} vs ${b}`
   }
@@ -145,6 +145,32 @@ class Utils {
     return bout.weight
   }
 
+  // boutWeightClass(bout, fallback = 'n/a') {
+  //   if (!bout) {
+  //     return fallback
+  //   }
+  //
+  //   if (bout.is_catchweight) {
+  //     let weight = this.boutWeight(bout)
+  //
+  //     return `Catchweight (${weight})`
+  //   }
+  //
+  //   let weights = [
+  //     { key: 115, value: 'Strawweight' },
+  //     { key: 125, value: 'Flyweight' },
+  //     { key: 135, value: 'Bantamweight' },
+  //     { key: 145, value: 'Featherweight' },
+  //     { key: 155, value: 'Lightweight' },
+  //     { key: 170, value: 'Welterweight' },
+  //     { key: 185, value: 'Middleweight' },
+  //     { key: 205, value: 'Light Heavyweight' },
+  //     { key: 265, value: 'Heavyweight' }
+  //   ]
+  //
+  //   return weights.find(b => b.key === bout.weight).value
+  // }
+  //
   eventFullTitle (event, fallback = '...') {
     if (!event) {
       return fallback
@@ -201,9 +227,9 @@ class Utils {
     return `https://res.cloudinary.com/immadb/image/${this.imageProfileBucket(person)}/c_scale,w_150/${this.imageProfileHandle(person)}`
   }
 
-  // personTwitterProfileLargeUrl (person) {
-  //   return `https://res.cloudinary.com/immadb/image/${this.imageProfileBucket(person)}/c_scale,w_300/${this.imageProfileHandle(person)}`
-  // }
+  personTwitterProfileLargeUrl (person) {
+    return `https://res.cloudinary.com/immadb/image/${this.imageProfileBucket(person)}/c_scale,w_300/${this.imageProfileHandle(person)}`
+  }
 
   personTwitterProfileThumbUrl (person) {
     return `https://res.cloudinary.com/immadb/image/${this.imageProfileBucket(person)}/c_scale,w_100/${this.imageProfileHandle(person)}`

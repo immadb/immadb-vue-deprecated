@@ -1,23 +1,31 @@
 <template>
-  <b-container>
-    <b-row>
-      <b-col md="6" offset-md="3">
-        <b-card no-body>
-          <b-card-header>
+  <b-card
+    no-body
+    border-variant="light"
+  >
+    <b-card-header
+      header-bg-variant="white"
+    >
+      <b-container>
+        <b-row>
+          <b-col class="p-0">
             <h2 class="mb-0">
               {{ title }}
             </h2>
-          </b-card-header>
-          <b-card-body>
-            <slot></slot>
-          </b-card-body>
-          <b-card-footer>
-            <!-- @todo What do we do with this...? -->
-          </b-card-footer>
-        </b-card>
-      </b-col>
-    </b-row>
-  </b-container>
+          </b-col>
+        </b-row>
+      </b-container>
+    </b-card-header>
+    <b-card-body>
+      <b-container>
+        <b-row align-h="center">
+          <b-col cols="6" class="p-0">
+            <slot />
+          </b-col>
+        </b-row>
+      </b-container>
+    </b-card-body>
+  </b-card>
 </template>
 
 <script>
